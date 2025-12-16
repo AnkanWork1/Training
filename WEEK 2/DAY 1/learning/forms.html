@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+  <label for="name">Full Name</label>
+  <input id="name" name="name" type="text" required>
+
+  <label for="email">Email Address</label>
+  <input id="email" name="email" type="email" required>
+
+  <label for="age">Age</label>
+  <input id="age" name="age" type="number" min="18" max="100">
+
+  <label for="msg">Message</label>
+  <textarea id="msg" name="msg" aria-describedby="msgHelp"></textarea>
+  <small id="msgHelp">Tell us more about your inquiry.</small>
+
+  <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

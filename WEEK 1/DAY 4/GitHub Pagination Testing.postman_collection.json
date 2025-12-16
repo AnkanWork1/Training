@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "83a5b425-9f83-4ada-8cfe-4bce82019f9f",
+		"name": "GitHub Pagination Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50568003",
+		"_collection_link": "https://ankang-hestabit-7500593.postman.co/workspace/bf046a3e-aeeb-4315-832f-19a7682cbf57/collection/50568003-83a5b425-9f83-4ada-8cfe-4bce82019f9f?action=share&source=collection_link&creator=50568003"
+	},
+	"item": [
+		{
+			"name": "Get GitHub User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+							"",
+							"pm.test(\"Has valid GitHub user\", () => {",
+							"    const json = pm.response.json();",
+							"    pm.expect(json.login).to.eql(pm.variables.get(\"username\"));",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users/{{username}}\n",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"{{username}}\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Repos Page 1",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get Repos Page 2",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get Repos Page 3",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": ""
+		},
+		{
+			"key": "username",
+			"value": ""
+		},
+		{
+			"key": "perPage",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MyKart — Products</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="mk-navbar mk-navbar--products">
+    <div class="mk-container nav-row">
+      <div class="brand">MyKart</div>
+
+      <div class="search-area">
+        <input id="searchInput" type="search" placeholder="Search for products, brands and more..." autofocus />
+        <button id="searchBtn" title="Search">🔍</button>
+      </div>
+
+      <div class="actions">
+        <select id="sortSelect" aria-label="Sort products">
+          <option value="">Sort By</option>
+          <option value="low">Price: Low → High</option>
+          <option value="high">Price: High → Low</option>
+        </select>
+        <button id="cartBtn" title="Cart">🛒</button>
+      </div>
+    </div>
+
+    <div class="mk-container category-row" id="categoryRow">
+      <!-- categories rendered by JS -->
+    </div>
+  </header>
+
+  <main class="mk-container page-body">
+    <section class="product-section">
+      <h2 class="section-title">NEW PRODUCTS</h2>
+
+      <div id="productsGrid" class="products-grid" aria-live="polite">
+        <!-- product cards injected here -->
+      </div>
+
+      <div id="loading" class="loading">Loading products…</div>
+      <div id="empty" class="empty" hidden>No products found.</div>
+    </section>
+  </main>
+
+  <script src="js/products.js"></script>
+</body>
+</html>

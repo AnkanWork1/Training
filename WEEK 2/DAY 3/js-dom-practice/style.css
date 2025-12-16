@@ -1,0 +1,65 @@
+/* ---------- Global Styles ---------- */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  padding: 40px;
+  margin: 0;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+}
+
+/* ---------- FAQ Container ---------- */
+.faq-container {
+  width: 700px;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+/* ---------- FAQ Item ---------- */
+.faq-item {
+  background: #1e73ff;  
+  border-radius: 6px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+
+/* ---------- FAQ Question ---------- */
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  padding: 14px 20px;
+  cursor: pointer;
+}
+
+/* ---------- Toggle Icon ( + / - ) ---------- */
+.faq-toggle {
+  background: white;
+  color: black;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* ---------- Answer Section ---------- */
+.faq-answer {
+  background: white;
+  padding: 16px 20px;
+  font-size: 16px;
+  color: black;
+  line-height: 1.6;
+  display: none;
+}
+
+.faq-answer.show {
+  display: block;
+}

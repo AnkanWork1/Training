@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layout Challenge</title>
+
+    <style>
+        body {
+            background: black;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background: rgb(56, 54, 54);
+            padding: 20px;
+            border-radius: 10px;
+            display: grid;
+            gap: 20px;
+        }
+
+        /* HEADER + FOOTER */
+        header, footer {
+            background: linear-gradient(90deg, #8b5cf6, #6366f1);
+            padding: 30px;
+            text-align: center;
+            font-size: 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        /* GRID LAYOUT */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+        }
+
+        aside {
+            background: linear-gradient(180deg, #34d399, #06b6d4);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 22px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        main {
+            display: grid;
+            gap: 20px;
+            grid-template-rows: auto auto;
+        }
+
+        .box {
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 24px;
+            background: linear-gradient(120deg, #3b82f6, #06b6d4);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .two-boxes {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 20px;
+        }
+
+        .small-box {
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 22px;
+            background: linear-gradient(120deg, #6366f1, #3b82f6);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .two-boxes {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <header>Header</header>
+
+        <div class="content-wrapper">
+            <aside>Sidebar</aside>
+
+            <main>
+                <div class="box">Content-1</div>
+
+                <div class="two-boxes">
+                    <div class="small-box">Content-2</div>
+                    <div class="small-box">Content-3</div>
+                </div>
+            </main>
+        </div>
+
+        <footer>Footer</footer>
+
+    </div>
+</body>
+</html>
