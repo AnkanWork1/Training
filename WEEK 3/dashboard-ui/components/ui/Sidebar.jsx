@@ -1,6 +1,7 @@
 export default function Sidebar() {
   return (
     <aside className="fixed top-16 left-0 w-[260px] h-[calc(100vh-4rem)] px-6 py-8">
+      
       <div className="bg-white rounded-xl shadow-sm h-full p-6">
         {/* Main Navigation */}
         <ul className="space-y-4 text-sm font-medium text-gray-700">
