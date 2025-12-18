@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div>
@@ -13,6 +15,10 @@ export default function Home() {
           Card 2
         </div>
       </div>
+
+      <Link href="/about">
+        Go to About Page
+      </Link>
     </div>
   );
 }
