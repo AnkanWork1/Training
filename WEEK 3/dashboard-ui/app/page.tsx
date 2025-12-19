@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Input from "@/components/ui/Input";
 export default function Home() {
   return (
     <div>
@@ -19,6 +19,8 @@ export default function Home() {
       <Link href="/about">
         Go to About Page
       </Link>
+
+      <Input placeholder="Type here..." />
     </div>
   );
 }
