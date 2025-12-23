@@ -5,6 +5,12 @@ const features = [
 { title: "Fast Performance", img: "/feature1.png" },
 { title: "Responsive UI", img: "/feature2.png" },
 { title: "SEO Optimized", img: "/feature3.png" },
+{ title: "Fast Performance", img: "/feature1.png" },
+{ title: "Responsive UI", img: "/feature2.png" },
+{ title: "SEO Optimized", img: "/feature3.png" },
+{ title: "Fast Performance", img: "/feature1.png" },
+{ title: "Responsive UI", img: "/feature2.png" },
+{ title: "SEO Optimized", img: "/feature3.png" },
 ];
 
 
