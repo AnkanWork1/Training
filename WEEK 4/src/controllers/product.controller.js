@@ -1,5 +1,4 @@
 import * as productService from "../services/product.service.js";
-import { AppError } from "../utils/AppError.js";
 
 export const getProducts = async (req, res, next) => {
   try {
@@ -10,10 +9,28 @@ export const getProducts = async (req, res, next) => {
   }
 };
 
+export const getProductById = async (req, res, next) => {
+  try {
+    const product = await productService.getProductById(req.params.id);
+    res.json({ success: true, data: product });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const softDeleteProduct = async (req, res, next) => {
   try {
-    await productService.softDeleteProduct(req.params.id);
-    res.json({ success: true, message: "Product soft deleted" });
+    const result = await productService.softDeleteProduct(req.params.id);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const restoreProduct = async (req, res, next) => {
+  try {
+    const result = await productService.restoreProduct(req.params.id);
+    res.json(result);
   } catch (err) {
     next(err);
   }
