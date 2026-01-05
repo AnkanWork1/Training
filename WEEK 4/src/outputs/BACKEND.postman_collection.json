@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "5d7cef49-cac6-474a-bea4-4046508b0802",
+		"name": "BACKEND",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50568003",
+		"_collection_link": "https://ankang-hestabit-7500593.postman.co/workspace/Ankan-Guha's-Workspace~bf046a3e-aeeb-4315-832f-19a7682cbf57/collection/50568003-5d7cef49-cac6-474a-bea4-4046508b0802?action=share&source=collection_link&creator=50568003"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"{",
+							"  \"info\": {",
+							"    \"name\": \"Day-5 Async Email API\",",
+							"    \"_postman_id\": \"123e4567-e89b-12d3-a456-426614174000\",",
+							"    \"description\": \"Postman collection for testing Day-5 email async jobs\",",
+							"    \"schema\": \"https://schema.getpostman.com/json/collection/v2.1.0/collection.json\"",
+							"  },",
+							"  \"item\": [",
+							"    {",
+							"      \"name\": \"Send Email\",",
+							"      \"request\": {",
+							"        \"method\": \"POST\",",
+							"        \"header\": [",
+							"          {",
+							"            \"key\": \"Content-Type\",",
+							"            \"value\": \"application/json\"",
+							"          }",
+							"        ],",
+							"        \"body\": {",
+							"          \"mode\": \"raw\",",
+							"          \"raw\": \"{\\n    \\\"to\\\": \\\"test@example.com\\\",\\n    \\\"subject\\\": \\\"Hello from Day 5\\\",\\n    \\\"body\\\": \\\"This is a test email from the async job system\\\"\\n}\"",
+							"        },",
+							"        \"url\": {",
+							"          \"raw\": \"http://localhost:3000/api/notify\",",
+							"          \"protocol\": \"http\",",
+							"          \"host\": [\"localhost\"],",
+							"          \"port\": \"3000\",",
+							"          \"path\": [\"api\", \"notify\"]",
+							"        }",
+							"      },",
+							"      \"response\": []",
+							"    },",
+							"    {",
+							"      \"name\": \"Ping Server\",",
+							"      \"request\": {",
+							"        \"method\": \"GET\",",
+							"        \"header\": [],",
+							"        \"url\": {",
+							"          \"raw\": \"http://localhost:3000/ping\",",
+							"          \"protocol\": \"http\",",
+							"          \"host\": [\"localhost\"],",
+							"          \"port\": \"3000\",",
+							"          \"path\": [\"ping\"]",
+							"        }",
+							"      },",
+							"      \"response\": []",
+							"    }",
+							"  ],",
+							"  \"event\": [",
+							"    {",
+							"      \"listen\": \"prerequest\",",
+							"      \"script\": {",
+							"        \"exec\": [],",
+							"        \"type\": \"text/javascript\"",
+							"      }",
+							"    },",
+							"    {",
+							"      \"listen\": \"test\",",
+							"      \"script\": {",
+							"        \"exec\": [],",
+							"        \"type\": \"text/javascript\"",
+							"      }",
+							"    }",
+							"  ]",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"info\": {\n    \"name\": \"Day-5 Async Email API\",\n    \"_postman_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n    \"description\": \"Postman collection for testing Day-5 email async jobs\",\n    \"schema\": \"https://schema.getpostman.com/json/collection/v2.1.0/collection.json\"\n  },\n  \"item\": [\n    {\n      \"name\": \"Send Email\",\n      \"request\": {\n        \"method\": \"POST\",\n        \"header\": [\n          {\n            \"key\": \"Content-Type\",\n            \"value\": \"application/json\"\n          }\n        ],\n        \"body\": {\n          \"mode\": \"raw\",\n          \"raw\": \"{\\n    \\\"to\\\": \\\"test@example.com\\\",\\n    \\\"subject\\\": \\\"Hello from Day 5\\\",\\n    \\\"body\\\": \\\"This is a test email from the async job system\\\"\\n}\"\n        },\n        \"url\": {\n          \"raw\": \"http://localhost:3000/api/notify\",\n          \"protocol\": \"http\",\n          \"host\": [\"localhost\"],\n          \"port\": \"3000\",\n          \"path\": [\"api\", \"notify\"]\n        }\n      },\n      \"response\": []\n    },\n    {\n      \"name\": \"Ping Server\",\n      \"request\": {\n        \"method\": \"GET\",\n        \"header\": [],\n        \"url\": {\n          \"raw\": \"http://localhost:3000/ping\",\n          \"protocol\": \"http\",\n          \"host\": [\"localhost\"],\n          \"port\": \"3000\",\n          \"path\": [\"ping\"]\n        }\n      },\n      \"response\": []\n    }\n  ],\n  \"event\": [\n    {\n      \"listen\": \"prerequest\",\n      \"script\": {\n        \"exec\": [],\n        \"type\": \"text/javascript\"\n      }\n    },\n    {\n      \"listen\": \"test\",\n      \"script\": {\n        \"exec\": [],\n        \"type\": \"text/javascript\"\n      }\n    }\n  ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/notify",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"notify"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

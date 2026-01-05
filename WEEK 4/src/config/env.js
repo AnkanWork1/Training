@@ -1,7 +1,17 @@
 import dotenv from "dotenv";
-console.log("🔵 env.js running");
+import { apiLogger } from "../utils/logger.js";
+
+apiLogger.info({
+  service: "api",
+  stage: "env"
+}, "🔵 env.js running");
+
 export function loadEnv() {
-    console.log("🌱 Loading environment variables...");
+  apiLogger.info({
+    service: "api",
+    stage: "env"
+  }, "🌱 Loading environment variables...");
+
   const env = process.env.NODE_ENV || "local";
 
   const envFiles = {
@@ -15,9 +25,17 @@ export function loadEnv() {
   const result = dotenv.config({ path });
 
   if (result.error) {
-    console.error("❌ Failed to load env file", result.error);
+    apiLogger.error({
+      service: "api",
+      stage: "env",
+      err: result.error
+    }, "❌ Failed to load env file");
     process.exit(1);
   }
 
-  console.log(`🌱 Environment loaded: ${env}`);
+  apiLogger.info({
+    service: "api",
+    stage: "env",
+    environment: env
+  }, `🌱 Environment loaded: ${env}`);
 }

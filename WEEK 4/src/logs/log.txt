@@ -1,0 +1,11 @@
+{"level":30,"time":"2026-01-02T12:42:50.068Z","pid":308810,"hostname":"HESTABIT-416","msg":"🟢 db.js running"}
+{"level":30,"time":"2026-01-02T12:42:50.069Z","pid":308810,"hostname":"HESTABIT-416","msg":"🔵 env.js running"}
+{"level":30,"time":"2026-01-02T12:42:50.070Z","pid":308810,"hostname":"HESTABIT-416","msg":"🌱 Environment loaded: local"}
+{"level":30,"time":"2026-01-02T12:42:50.090Z","pid":308810,"hostname":"HESTABIT-416","msg":"✅ Database connected"}
+{"level":30,"time":"2026-01-02T12:42:50.093Z","pid":308810,"hostname":"HESTABIT-416","msg":"✅ Server ready and running"}
+{"level":30,"time":"2026-01-02T12:43:27.191Z","pid":309893,"hostname":"HESTABIT-416","msg":"🟢 db.js running"}
+{"level":30,"time":"2026-01-02T12:43:27.192Z","pid":309893,"hostname":"HESTABIT-416","msg":"🔵 env.js running"}
+{"level":30,"time":"2026-01-02T12:43:27.193Z","pid":309893,"hostname":"HESTABIT-416","msg":"🌱 Environment loaded: local"}
+{"level":30,"time":"2026-01-02T12:43:27.217Z","pid":309893,"hostname":"HESTABIT-416","msg":"✅ Database connected"}
+{"level":30,"time":"2026-01-02T12:43:27.219Z","pid":309893,"hostname":"HESTABIT-416","msg":"✅ Server ready and running"}
+{"level":30,"time":"2026-01-02T12:43:27.221Z","pid":309893,"hostname":"HESTABIT-416","msg":"✅ Server running on port 3000"}

@@ -1,18 +1,44 @@
 import mongoose from "mongoose";
-import { logger } from "../utils/logger.js";
+import { apiLogger } from "../utils/logger.js";
+
+apiLogger.info(
+  {
+    service: "api",
+    stage: "database"
+  },
+  "🟢 db.js running"
+);
 
 export async function connectDB(uri) {
   if (!uri) {
-    logger.error("❌ DB_URI is undefined! Check your .env file.");
+    apiLogger.error(
+      {
+        service: "api",
+        stage: "database"
+      },
+      "❌ DB_URI is undefined! Check your .env file."
+    );
     process.exit(1);
   }
 
   try {
-    await mongoose.connect(uri); // ✅ no extra options needed
-    logger.info("✅ Database connected");
+    await mongoose.connect(uri);
+    apiLogger.info(
+      {
+        service: "api",
+        stage: "database"
+      },
+      "✅ Database connected"
+    );
   } catch (err) {
-    logger.error("❌ Database connection failed:");
-    console.error(err); // full error
+    apiLogger.error(
+      {
+        err,
+        service: "api",
+        stage: "database"
+      },
+      "❌ Database connection failed"
+    );
     process.exit(1);
   }
 }
