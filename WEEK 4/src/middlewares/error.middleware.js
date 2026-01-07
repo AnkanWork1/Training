@@ -1,11 +1,23 @@
-export const errorMiddleware = (err, req, res, next) => {
-  const status = err.statusCode || 500;
+import { withRequest } from "../utils/logger.js";
 
-  res.status(status).json({
-    success: false,
-    message: err.message || "Internal Server Error",
-    code: err.code || "INTERNAL_ERROR",
-    timestamp: new Date().toISOString(),
-    path: req.originalUrl
+export const errorHandler = (err, req, res, next) => {
+  const log = withRequest(req);
+
+  log.error(
+    {
+      err, // pino automatically serializes stack + message
+      method: req.method,
+      url: req.originalUrl,
+      body: req.body,
+      params: req.params,
+      query: req.query,
+      service: "api"
+    },
+    "Unhandled application error"
+  );
+
+  res.status(err.status || 500).json({
+    error: err.message || "Internal Server Error",
+    requestId: req.requestId
   });
 };

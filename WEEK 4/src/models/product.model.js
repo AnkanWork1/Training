@@ -5,30 +5,46 @@ const productSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      trim: true,
+      trim: true
     },
+
     description: {
       type: String,
-      trim: true,
+      trim: true
     },
+
     price: {
       type: Number,
       required: true,
-      min: 0,
+      min: 0
     },
+
     tags: {
       type: [String],
-      index: true,
-      default: [],
+      default: []
     },
-    detectedAt: {
+
+    deletedAt: {
       type: Date,
-      default: Date.now,
-    },
+      default: null,
+      index: true
+    }
   },
-  {
-    timestamps: true, // createdAt, updatedAt
-  }
+  { timestamps: true }
 );
 
-export default mongoose.model("products", productSchema);
+/**
+ * ✅ GLOBAL SOFT DELETE FILTER
+ * Automatically exclude soft-deleted docs
+ */
+productSchema.pre(/^find/, function () {
+  // `this` is the mongoose query
+  if (this.options && this.options.includeDeleted) {
+    return;
+  }
+
+  this.where({ deletedAt: null });
+});
+
+const Product = mongoose.model("Product", productSchema);
+export default Product;

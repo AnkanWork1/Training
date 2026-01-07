@@ -1,33 +1,66 @@
-import { loadEnv } from "./config/env.js";
-import { config } from "./config/index.js";
-import { connectDB } from "./loaders/db.js";
 import { loadApp } from "./loaders/app.js";
-import { logger } from "./utils/logger.js";
+import { connectDB } from "./loaders/db.js";
+import { config } from "./config/index.js";
+import { loadEnv } from "./config/env.js";
+import { apiLogger } from "./utils/logger.js";
 
-console.log("🔷 Starting server...");
-loadEnv(); // Load environment first
-
+loadEnv();
 
 async function startServer() {
-  const cfg = config(); // read fresh env
-  console.log("🔹 DB URI:", cfg.db.uri);
+  const cfg = config();
 
-  await connectDB(cfg.db.uri);
+  try {
+    apiLogger.info(
+      {
+        service: "api",
+        stage: "bootstrap"
+      },
+      "Starting server bootstrap"
+    );
 
-  const app = await loadApp();
-  const server = app.listen(cfg.port, () => {
-    logger.info(`✅ Server started on port ${cfg.port}`);
-  });
+    // Connect MongoDB
+    await connectDB(cfg.db.uri);
+    apiLogger.info(
+      {
+        service: "api",
+        stage: "database"
+      },
+      "MongoDB connected"
+    );
 
-  // Graceful shutdown
-  const shutdown = async (signal) => {
-    logger.warn(`⚠️ Received ${signal}. Closing DB & server...`);
-    await mongoose.connection.close();
-    server.close(() => process.exit(0));
-  };
+    // Load Express app
+    const app = await loadApp();
+    apiLogger.info(
+      {
+        service: "api",
+        stage: "app"
+      },
+      "Express app loaded"
+    );
 
-  process.on("SIGINT", shutdown);
-  process.on("SIGTERM", shutdown);
+    // Start server
+    const PORT = cfg.port || 3000;
+    app.listen(PORT, () => {
+      apiLogger.info(
+        {
+          service: "api",
+          stage: "listen",
+          port: PORT
+        },
+        `Server running on port ${PORT}`
+      );
+    });
+  } catch (err) {
+    apiLogger.error(
+      {
+        err,
+        service: "api",
+        stage: "fatal"
+      },
+      "Server failed to start"
+    );
+    process.exit(1);
+  }
 }
 
 startServer();
