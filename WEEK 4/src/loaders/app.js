@@ -1,19 +1,25 @@
 import express from "express";
-import { logger } from "../utils/logger.js";
 import productRoutes from "../routes/product.routes.js"; // if you have product routes
 import userRoutes from "../routes/userRoutes.js";
 import { securityMiddleware } from "../middlewares/security.js";
+import { requestLogger } from "../middlewares/logger.js";
+import { errorHandler } from "../middlewares/error.middleware.js";
+import { requestTracing } from "../utils/tracing.js";
+import notifyRoutes from "../routes/notify.routes.js";
 
+import emailRoutes from "../routes/email.routes.js";
 
 export async function loadApp() {
-  logger.info("🚀 Bootstrapping application");
-
   const app = express();
   securityMiddleware(app); // attach globally
-
   app.use(express.json());
-  logger.info("🧩 Middlewares loaded");
-// Ping route
+  app.use(requestLogger);
+  app.use(errorHandler);
+
+  app.use(requestTracing);
+
+app.use("/api", emailRoutes);
+  // Ping route
   app.get("/ping", (req, res) => res.send("pong"));
 
   // Optional root route
@@ -21,10 +27,8 @@ export async function loadApp() {
 
   // Product routes
   app.use("/products", productRoutes);
-  logger.info("🛣 Routes mounted: 1 endpoint");
 
   app.use("/api/users", userRoutes);
-  logger.info("🛣 Routes mounted: /api/users endpoint");
 
   return app;
 }
