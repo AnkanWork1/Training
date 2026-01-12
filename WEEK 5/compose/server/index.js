@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import os from "os";
 
 const app = express();
 
@@ -14,6 +15,12 @@ mongoose
     console.error("❌ Mongo error:", err);
   });
 
+app.get("/api/health", (req,res) => {
+	res.json({
+	status: "ok",
+	server: os.hostname()
+	});
+});
 app.get("/", (req, res) => {
   res.send("Server is running");
 });
