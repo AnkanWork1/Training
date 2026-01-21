@@ -1,0 +1,10 @@
+2026-01-21 19:55:54,672 | INFO | Loading raw data from data/raw/dataset.csv
+2026-01-21 19:55:54,674 | INFO | Data loaded with shape: (2721, 3)
+2026-01-21 19:55:54,674 | INFO | Starting cleaning process...
+2026-01-21 19:55:54,676 | INFO | Removed 27 outliers from Year using IQR
+2026-01-21 19:55:54,677 | INFO | Removed 4 outliers from Median (2021 prices) using IQR
+2026-01-21 19:55:54,677 | INFO | Data cleaning completed
+2026-01-21 19:55:54,681 | INFO | Processed data saved to data/processed/final.csv
+2026-01-21 19:55:54,681 | INFO | Generating EDA report...
+2026-01-21 19:55:54,984 | INFO | EDA report saved in data/processed/eda_report
+2026-01-21 19:55:54,984 | INFO | Data pipeline completed successfully!
