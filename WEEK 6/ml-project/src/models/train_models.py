@@ -10,17 +10,13 @@ from sklearn.neural_network import MLPRegressor
 from xgboost import XGBRegressor
 
 
-# --------------------------------------------------
 # Resolve models directory safely (src/models/)
-# --------------------------------------------------
-BASE_DIR = Path(__file__).resolve().parent.parent   # src/
+BASE_DIR = Path(__file__).resolve().parent.parent
 MODELS_DIR = BASE_DIR / "models"
 MODELS_DIR.mkdir(parents=True, exist_ok=True)
 
 
-# --------------------------------------------------
 # Model training functions
-# --------------------------------------------------
 def train_linear_regression(X_train, y_train):
     model = LinearRegression()
     model.fit(X_train, y_train)

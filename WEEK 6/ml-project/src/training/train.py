@@ -1,11 +1,9 @@
-# -----------------------------
-# 0️⃣ Imports
-# -----------------------------
 import pandas as pd
 import joblib
 import json
 from pathlib import Path
 
+from sklearn.model_selection import cross_val_score
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 # Model training functions
@@ -16,9 +14,6 @@ from models.train_models import (
     train_neural_network
 )
 
-# -----------------------------
-# 1️⃣ Training function
-# -----------------------------
 def train_all_models(X_train, X_test, y_train, y_test):
     """
     Trains multiple regression models, evaluates them, 
@@ -45,19 +40,19 @@ def train_all_models(X_train, X_test, y_train, y_test):
         rmse = mse ** 0.5
 
         r2 = r2_score(y_test, y_pred)
+        cv_scores = cross_val_score(model, X_train, y_train, cv=5, scoring='r2')
+        cv_mean = cv_scores.mean()
 
-        metrics[name] = {"MAE": mae, "RMSE": rmse, "R2": r2}
+        metrics[name] = {"MAE": mae, "RMSE": rmse, "R2": r2, "CV_R2_mean": cv_mean}
 
         if r2 > best_r2:
             best_r2 = r2
             best_model_name = name
             best_model_obj = model
+            
+        print(f"{name}: Test R2={r2:.4f}, 5-Fold CV R2={cv_mean:.4f}")
     
-    # -----------------------------
-    # Save models and metrics safely
-    # -----------------------------
-    # BASE_DIR = folder where this train.py exists
-    BASE_DIR = Path(__file__).parent.parent  # go up from training/ to src/
+    BASE_DIR = Path(__file__).parent.parent  
     
     MODELS_DIR = BASE_DIR / "models"
     MODELS_DIR.mkdir(parents=True, exist_ok=True)
@@ -81,17 +76,3 @@ def train_all_models(X_train, X_test, y_train, y_test):
     print("All models and metrics saved.")
 
     return models, best_model_obj, metrics
-
-# -----------------------------
-# 2️⃣ Optional: Example of usage if running this script directly
-# -----------------------------
-if __name__ == "__main__":
-    # Load preprocessed data
-    DATA_DIR = Path("../data/processed")
-    X_train = pd.read_csv(DATA_DIR / "X_train_final.csv")
-    X_test  = pd.read_csv(DATA_DIR / "X_test_final.csv")
-    y_train = pd.read_csv(DATA_DIR / "y_train.csv").squeeze()
-    y_test  = pd.read_csv(DATA_DIR / "y_test.csv").squeeze()
-
-    # Call the training function
-    train_all_models(X_train, X_test, y_train, y_test)
