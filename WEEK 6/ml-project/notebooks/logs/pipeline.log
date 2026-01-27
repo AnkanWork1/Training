@@ -89,3 +89,16 @@
 2026-01-27 18:02:45,727 | INFO | Removed 2453 outliers from engineSize using IQR
 2026-01-27 18:02:45,728 | INFO | Data cleaning completed
 2026-01-27 18:02:45,738 | INFO | Processed data saved to data/processed/bmw_final.csv
+2026-01-27 19:22:36,749 | INFO | Loading raw data from ../data/raw/bmw.csv
+2026-01-27 19:22:36,766 | INFO | Data loaded with shape: (10781, 9)
+2026-01-27 19:22:36,767 | INFO | Starting cleaning process...
+2026-01-27 19:22:36,772 | INFO | Dropped 117 duplicate rows
+2026-01-27 19:22:36,775 | INFO | Filled 1 missing values in price with median 20263.0
+2026-01-27 19:22:36,777 | INFO | Removed 212 outliers from year using IQR
+2026-01-27 19:22:36,779 | INFO | Removed 476 outliers from price using IQR
+2026-01-27 19:22:36,782 | INFO | Removed 214 outliers from mileage using IQR
+2026-01-27 19:22:36,784 | INFO | Removed 2347 outliers from tax using IQR
+2026-01-27 19:22:36,786 | INFO | Removed 236 outliers from mpg using IQR
+2026-01-27 19:22:36,788 | INFO | Removed 2453 outliers from engineSize using IQR
+2026-01-27 19:22:36,789 | INFO | Data cleaning completed
+2026-01-27 19:22:36,801 | INFO | Processed data saved to data/processed/bmw_final.csv
