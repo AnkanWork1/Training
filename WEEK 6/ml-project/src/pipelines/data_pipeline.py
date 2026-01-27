@@ -5,7 +5,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import os
-from src.utils.logger import logger  # your logger script
+from utils.logger import logger  # your logger script
 
 # Paths
 RAW_PATH = "data/raw/dataset.csv"
