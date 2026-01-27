@@ -1,56 +1,73 @@
 # /features/feature_selector.py
+
 import pandas as pd
 import numpy as np
-import json
-import matplotlib.pyplot as plt
-from sklearn.feature_selection import RFE, mutual_info_regression
-from sklearn.ensemble import RandomForestRegressor
-import os
+from sklearn.feature_selection import mutual_info_regression, RFE
+from sklearn.linear_model import LinearRegression
 
-def feature_selector(X_train, X_test, y_train, n_features=10, save_path="features/feature_list.json"):
+def remove_highly_correlated_features(X, threshold=0.9):
     """
-    Performs feature selection and saves selected features.
-    Returns reduced X_train, X_test and selected features list.
+    Removes features that are highly correlated with others.
     """
-    X_train_fs = X_train.copy()
-    
-    # 1️⃣ Remove highly correlated features
-    corr_matrix = X_train_fs.corr().abs()
+    '''
+    2. Why remove features based on correlation?
+    Highly correlated features contain redundant information.
+    If two features are almost perfectly correlated:
+    Model can get confused
+    Might give too much weight to similar information
+    Can increase overfitting
+    Slows down training
+    Example:
+    engineSize and tax could be strongly correlated (bigger engines → higher road tax).
+    Keeping both doesn’t add much new information, so we can remove one.
+    '''
+    corr_matrix = X.corr().abs()
     upper = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
-    drop_cols = [col for col in upper.columns if any(upper[col] > 0.9)]
-    if drop_cols:
-        print(f"Dropping highly correlated features: {drop_cols}")
-    X_train_fs = X_train_fs.drop(columns=drop_cols)
-    X_test_fs = X_test.drop(columns=drop_cols)
+
+    to_drop = [col for col in upper.columns if any(upper[col] > threshold)]
+    X_reduced = X.drop(columns=to_drop)
     
-    # 2️⃣ Mutual Information (for info only)
-    mi = mutual_info_regression(X_train_fs, y_train)
-    mi_series = pd.Series(mi, index=X_train_fs.columns).sort_values(ascending=False)
-    print("\nMutual Information Scores:")
-    print(mi_series)
+    print(f"Dropped due to correlation > {threshold}: {to_drop}")
+    return X_reduced, to_drop
+
     
-    # 3️⃣ RFE with RandomForest
-    model = RandomForestRegressor(n_estimators=100, random_state=42)
-    rfe = RFE(model, n_features_to_select=min(n_features, X_train_fs.shape[1]))
-    rfe.fit(X_train_fs, y_train)
+def select_features_mutual_info(X, y, top_k=None):
+    mi_scores = mutual_info_regression(X, y, random_state=42)
+    mi_df = pd.DataFrame({
+        "feature": X.columns,
+        "mi_score": mi_scores
+    }).sort_values(by="mi_score", ascending=False)
+
+    if top_k:
+        selected_features = mi_df.head(top_k)["feature"].tolist()
+    else:
+        selected_features = mi_df[mi_df["mi_score"] > 0.01]["feature"].tolist()
+
+    return selected_features, mi_df
+
+
+def select_features_rfe(X, y, n_features=5):
+    """
+    Select features using Recursive Feature Elimination (RFE) with LinearRegression.
+    """
+    model = LinearRegression()
+    rfe = RFE(model, n_features_to_select=n_features)
+    rfe.fit(X, y)
     
-    selected_features = X_train_fs.columns[rfe.support_].tolist()
-    print(f"\nSelected features via RFE ({len(selected_features)}): {selected_features}")
+    selected_features = X.columns[rfe.support_]
+    return selected_features
+
+def run_feature_selection(X, y, corr_threshold=0.9, top_k_mi=None, n_rfe=5):
+    """
+    Full pipeline: correlation threshold → mutual info → RFE
+    """
+    # 1️⃣ Remove highly correlated features
+    X_corr, dropped_corr = remove_highly_correlated_features(X, threshold=corr_threshold)
     
-    # Reduce datasets
-    X_train_final = X_train_fs[selected_features]
-    X_test_final = X_test_fs[selected_features]
+    # 2️⃣ Select with mutual information
+    X_mi, selected_mi, mi_df = select_features_mutual_info(X_corr, y, top_k=top_k_mi)
     
-    # 4️⃣ Save selected features to JSON
-    os.makedirs(os.path.dirname(save_path), exist_ok=True)
-    with open(save_path, "w") as f:
-        json.dump(selected_features, f, indent=4)
+    # 3️⃣ Select final features with RFE
+    X_final, selected_rfe = select_features_rfe(X_mi, y, n_features=n_rfe)
     
-    # 5️⃣ Plot feature importance from RandomForest
-    model.fit(X_train_final, y_train)
-    importances = pd.Series(model.feature_importances_, index=selected_features)
-    importances.sort_values().plot(kind="barh", figsize=(8,6), title="Feature Importances")
-    plt.tight_layout()
-    plt.show()
-    
-    return X_train_final, X_test_final, selected_features
+    return X_final, selected_rfe, mi_df, dropped_corr
