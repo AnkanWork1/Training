@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 from sklearn.model_selection import train_test_split
 
 CURRENT_YEAR = 2025
@@ -30,4 +30,8 @@ def build_features(df):
     cat_cols = ["transmission", "fuelType"]
     df = pd.get_dummies(df, columns=cat_cols, drop_first=True)
 
-    return df, y
+    # Label encode 'model'
+    le_model = LabelEncoder()
+    df["model"] = le_model.fit_transform(df["model"])
+
+    return df, y ,le_model
