@@ -23,7 +23,7 @@ def run_shap_analysis(X_train):
     shap_values = explainer(X_train)
 
     plt.figure()
-    shap.summary_plot(shap_values, X_train, show=False)
+    shap.summary_plot(shap_values, X_train, show=True)
     plt.savefig(EVAL_DIR / "shap_summary.png", bbox_inches="tight")
     plt.close()
 

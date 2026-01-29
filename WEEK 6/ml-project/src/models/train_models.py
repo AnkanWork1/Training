@@ -20,7 +20,6 @@ MODELS_DIR.mkdir(parents=True, exist_ok=True)
 def train_linear_regression(X_train, y_train):
     model = LinearRegression()
     model.fit(X_train, y_train)
-    joblib.dump(model, MODELS_DIR / "linear_reg.pkl")
     return model
 
 
@@ -31,7 +30,6 @@ def train_random_forest(X_train, y_train):
         n_jobs=-1
     )
     model.fit(X_train, y_train)
-    joblib.dump(model, MODELS_DIR / "random_forest.pkl")
     return model
 
 
@@ -42,7 +40,6 @@ def train_xgboost(X_train, y_train):
         verbosity=0
     )
     model.fit(X_train, y_train)
-    joblib.dump(model, MODELS_DIR / "xgboost.pkl")
     return model
 
 
@@ -53,5 +50,4 @@ def train_neural_network(X_train, y_train):
         random_state=42
     )
     model.fit(X_train, y_train)
-    joblib.dump(model, MODELS_DIR / "neural_net.pkl")
     return model
