@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.feature_selection import mutual_info_regression, RFE
 from sklearn.linear_model import LinearRegression
 
-def remove_highly_correlated_features(X, threshold=0.9):
+def remove_highly_correlated_features(X, threshold=0.85):
     """
     Removes features that are highly correlated with others.
     """
@@ -46,7 +46,7 @@ def select_features_mutual_info(X, y, top_k=None):
     return selected_features, mi_df
 
 
-def select_features_rfe(X, y, n_features=5):
+def select_features_rfe(X, y, n_features=10):
     """
     Select features using Recursive Feature Elimination (RFE) with LinearRegression.
     """
@@ -57,17 +57,22 @@ def select_features_rfe(X, y, n_features=5):
     selected_features = X.columns[rfe.support_]
     return selected_features
 
-def run_feature_selection(X, y, corr_threshold=0.9, top_k_mi=None, n_rfe=5):
+def run_feature_selection(X,X_test, y, corr_threshold=0.9, top_k_mi=None, n_rfe=10):
     """
     Full pipeline: correlation threshold → mutual info → RFE
     """
     # 1️⃣ Remove highly correlated features
     X_corr, dropped_corr = remove_highly_correlated_features(X, threshold=corr_threshold)
-    
+    X_test_corr = X_test[X_corr.columns]
     # 2️⃣ Select with mutual information
-    X_mi, selected_mi, mi_df = select_features_mutual_info(X_corr, y, top_k=top_k_mi)
+    selected_features, mi_df = select_features_mutual_info(X_corr, y, top_k=10)
     
+    X_train_mi = X_corr[selected_features]
+    X_test_mi = X_test_corr[selected_features]
     # 3️⃣ Select final features with RFE
-    X_final, selected_rfe = select_features_rfe(X_mi, y, n_features=n_rfe)
-    
-    return X_final, selected_rfe, mi_df, dropped_corr
+    selected_rfe_features= select_features_rfe(X_train_mi, y)
+
+    X_train_final = X_train_mi[selected_rfe_features]
+    X_test_final = X_test_mi[selected_rfe_features]
+
+    return X_train_final, X_test_final, mi_df

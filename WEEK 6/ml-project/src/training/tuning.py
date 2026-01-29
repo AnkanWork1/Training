@@ -13,7 +13,7 @@ MODELS_DIR.mkdir(parents=True, exist_ok=True)
 TUNING_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def tune_xgboost(X_train, y_train):
+def tune_model(X_train, y_train):
     """
     Tune XGBoost hyperparameters using GridSearchCV
     """
@@ -44,7 +44,7 @@ def tune_xgboost(X_train, y_train):
     best_score = grid_search.best_score_
 
     # Save tuned model
-    joblib.dump(best_model, MODELS_DIR / "xgb_tuned.pkl")
+    joblib.dump(best_model, MODELS_DIR / "tuned1.pkl")
 
     # Save tuning results
     results = {

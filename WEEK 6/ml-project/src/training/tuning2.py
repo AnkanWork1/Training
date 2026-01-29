@@ -18,7 +18,7 @@ TUNING_DIR = BASE_DIR / "tuning"
 MODELS_DIR.mkdir(exist_ok=True, parents=True)
 TUNING_DIR.mkdir(exist_ok=True, parents=True)
 
-def tune_xgboost_optuna(X_train, y_train, n_trials=30):
+def tune_model_optuna(X_train, y_train, n_trials=30):
     """
     Hyperparameter tuning for XGBoost using Optuna
     """
@@ -46,7 +46,7 @@ def tune_xgboost_optuna(X_train, y_train, n_trials=30):
     tuned_model.fit(X_train, y_train)
 
     # Save tuned model
-    joblib.dump(tuned_model, MODELS_DIR / "xgb_tuned_optuna.pkl")
+    joblib.dump(tuned_model, MODELS_DIR / "model_tuned_optuna.pkl")
 
     # Save tuning results
     results = {

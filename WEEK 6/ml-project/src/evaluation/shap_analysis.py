@@ -17,7 +17,7 @@ def run_shap_analysis(X_train):
     Generate SHAP summary plot
     """
 
-    model = joblib.load(MODELS_DIR / "xgb_tuned_optuna.pkl")
+    model = joblib.load(MODELS_DIR / "model_tuned_optuna.pkl")
 
     explainer = shap.Explainer(model, X_train)
     shap_values = explainer(X_train)

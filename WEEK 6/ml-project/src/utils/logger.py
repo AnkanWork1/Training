@@ -3,9 +3,9 @@
 import logging
 from pathlib import Path
 
-LOG_DIR = Path("logs")
-LOG_DIR.mkdir(exist_ok=True)
-
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+LOG_DIR = PROJECT_ROOT / "logs"
+LOG_DIR.mkdir(parents=True, exist_ok=True)
 LOG_FILE = LOG_DIR / "pipeline.log"
 
 logging.basicConfig(

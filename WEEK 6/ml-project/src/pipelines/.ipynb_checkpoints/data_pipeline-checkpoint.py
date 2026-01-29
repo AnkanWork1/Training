@@ -10,7 +10,7 @@ from utils.logger import logger  # your logger script
 # Paths
 RAW_PATH = "data/raw/dataset.csv"
 PROCESSED_PATH = "data/processed/final.csv"
-EDA_PATH = "data/processed/eda_report"
+EDA_PATH = "logs/data_pipeline.log"
 os.makedirs(EDA_PATH, exist_ok=True)
 
 def load_data(path=RAW_PATH):

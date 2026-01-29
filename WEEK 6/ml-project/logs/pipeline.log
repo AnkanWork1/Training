@@ -8,3 +8,57 @@
 2026-01-21 19:55:54,681 | INFO | Generating EDA report...
 2026-01-21 19:55:54,984 | INFO | EDA report saved in data/processed/eda_report
 2026-01-21 19:55:54,984 | INFO | Data pipeline completed successfully!
+2026-01-28 17:12:19,614 | INFO | Loading raw data from ../data/raw/bmw.csv
+2026-01-28 17:12:19,622 | INFO | Data loaded with shape: (10781, 9)
+2026-01-28 17:12:19,622 | INFO | Starting cleaning process...
+2026-01-28 17:12:19,631 | INFO | Dropped 117 duplicate rows
+2026-01-28 17:12:19,633 | INFO | Filled 1 missing values in price with median 20263.0
+2026-01-28 17:12:19,635 | INFO | Removed 212 outliers from year using IQR
+2026-01-28 17:12:19,637 | INFO | Removed 476 outliers from price using IQR
+2026-01-28 17:12:19,639 | INFO | Removed 214 outliers from mileage using IQR
+2026-01-28 17:12:19,640 | INFO | Removed 2347 outliers from tax using IQR
+2026-01-28 17:12:19,642 | INFO | Removed 236 outliers from mpg using IQR
+2026-01-28 17:12:19,644 | INFO | Removed 2453 outliers from engineSize using IQR
+2026-01-28 17:12:19,644 | INFO | Data cleaning completed
+2026-01-28 17:14:40,304 | INFO | Cleaned dataset saved to ../data/processed/bmw_final.csv
+2026-01-28 17:14:48,610 | INFO | Cleaned dataset saved to ../data/processed/bmw_final.csv
+2026-01-29 12:16:15,424 | INFO | Loading raw data from ../data/raw/bmw.csv
+2026-01-29 12:16:15,433 | INFO | Data loaded with shape: (10781, 9)
+2026-01-29 12:16:15,433 | INFO | Starting cleaning process...
+2026-01-29 12:16:15,441 | INFO | Dropped 117 duplicate rows
+2026-01-29 12:16:15,444 | INFO | Filled 1 missing values in price with median 20263.0
+2026-01-29 12:16:15,447 | INFO | Removed 212 outliers from year using IQR
+2026-01-29 12:16:15,449 | INFO | Removed 476 outliers from price using IQR
+2026-01-29 12:16:15,451 | INFO | Removed 214 outliers from mileage using IQR
+2026-01-29 12:16:15,453 | INFO | Removed 2347 outliers from tax using IQR
+2026-01-29 12:16:15,454 | INFO | Removed 236 outliers from mpg using IQR
+2026-01-29 12:16:15,456 | INFO | Removed 2453 outliers from engineSize using IQR
+2026-01-29 12:16:15,456 | INFO | Data cleaning completed
+2026-01-29 12:16:16,848 | INFO | Cleaned dataset saved to ../data/processed/bmw_final.csv
+2026-01-29 13:03:47,584 | INFO | Loading raw data from ../data/raw/bmw.csv
+2026-01-29 13:03:47,592 | INFO | Data loaded with shape: (10781, 9)
+2026-01-29 13:03:47,593 | INFO | Starting cleaning process...
+2026-01-29 13:03:47,601 | INFO | Dropped 117 duplicate rows
+2026-01-29 13:03:47,603 | INFO | Filled 1 missing values in price with median 20263.0
+2026-01-29 13:03:47,607 | INFO | Removed 212 outliers from year using IQR
+2026-01-29 13:03:47,610 | INFO | Removed 476 outliers from price using IQR
+2026-01-29 13:03:47,613 | INFO | Removed 214 outliers from mileage using IQR
+2026-01-29 13:03:47,615 | INFO | Removed 2347 outliers from tax using IQR
+2026-01-29 13:03:47,616 | INFO | Removed 236 outliers from mpg using IQR
+2026-01-29 13:03:47,618 | INFO | Removed 2453 outliers from engineSize using IQR
+2026-01-29 13:03:47,618 | INFO | Data cleaning completed
+2026-01-29 13:03:48,362 | INFO | Cleaned dataset saved to ../data/processed/bmw_final.csv
+2026-01-29 13:20:58,815 | ERROR | Task was destroyed but it is pending!
+task: <Task pending name='Task-324' coro=<Kernel.dispatch_control() running at /home/ankanguha/Desktop/Training/WEEK 6/ml-project/.venv/lib/python3.12/site-packages/ipykernel/kernelbase.py:341> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[ZMQStream._run_callback.<locals>._log_error() at /home/ankanguha/Desktop/Training/WEEK 6/ml-project/.venv/lib/python3.12/site-packages/zmq/eventloop/zmqstream.py:563]>
+2026-01-29 13:22:05,079 | INFO | Loading raw data from ../data/raw/bmw.csv
+2026-01-29 13:22:05,087 | INFO | Data loaded with shape: (10781, 9)
+2026-01-29 13:22:05,088 | INFO | Starting cleaning process...
+2026-01-29 13:22:05,093 | INFO | Dropped 117 duplicate rows
+2026-01-29 13:22:05,095 | INFO | Filled 1 missing values in price with median 20263.0
+2026-01-29 13:22:05,097 | INFO | Removed 212 outliers from year using IQR
+2026-01-29 13:22:05,100 | INFO | Removed 476 outliers from price using IQR
+2026-01-29 13:22:05,102 | INFO | Removed 214 outliers from mileage using IQR
+2026-01-29 13:22:05,103 | INFO | Removed 2347 outliers from tax using IQR
+2026-01-29 13:22:05,105 | INFO | Removed 236 outliers from mpg using IQR
+2026-01-29 13:22:05,106 | INFO | Removed 2453 outliers from engineSize using IQR
+2026-01-29 13:22:05,106 | INFO | Data cleaning completed
