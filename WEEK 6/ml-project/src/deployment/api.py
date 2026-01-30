@@ -152,3 +152,7 @@ def predict(data: PredictionRequest):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/")
+def health_check():
+    return {"status": "ok", "message": "BMW Price Prediction API is running"}
