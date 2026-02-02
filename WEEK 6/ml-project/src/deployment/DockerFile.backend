@@ -1,17 +1,18 @@
-# Base image
 FROM python:3.12-slim
 
-# Set work directory
 WORKDIR /app
 
-# Copy requirements and install
-COPY requirements.backend.txt .
-RUN pip install --no-cache-dir -r requirements.backend.txt
+# Copy backend code and requirements
+COPY deployment/api.py .
+COPY deployment/requirements.txt .
 
-# Copy backend code
-COPY api.py .
+# Copy models folder
+COPY models ./models
 
-# Expose backend port
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose FastAPI port
 EXPOSE 8000
 
 # Run FastAPI

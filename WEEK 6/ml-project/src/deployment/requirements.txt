@@ -4,3 +4,11 @@ pandas
 numpy
 scikit-learn
 joblib
+fastapi
+uvicorn[standard]
+pandas
+numpy
+scikit-learn
+joblib
+streamlit
+xgboost

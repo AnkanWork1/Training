@@ -15,7 +15,8 @@ trans = st.selectbox("Transmission", ["Automatic", "Semi-Auto", "Manual"])
 fuel = st.selectbox("Fuel Type", ["Petrol", "Diesel"])
 
 # API URL
-API_URL = "http://127.0.0.1:8000/predict"  # Update if using a different host/port
+API_URL = "http://backend:8000/predict"
+  # Update if using a different host/port
 
 if st.button("Predict"):
 

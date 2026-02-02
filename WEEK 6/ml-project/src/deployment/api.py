@@ -3,6 +3,8 @@ import uuid
 import joblib
 import pandas as pd
 import numpy as np
+
+
 from datetime import datetime
 
 from fastapi import FastAPI, HTTPException
@@ -14,7 +16,8 @@ from pydantic import BaseModel
 
 CURRENT_YEAR = 2025
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 MODEL_PATH = os.path.join(BASE_DIR, "models/model_tuned_optuna.pkl")
 ENCODER_PATH = os.path.join(BASE_DIR, "models/model_label_encoder.pkl")

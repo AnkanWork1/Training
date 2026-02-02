@@ -1,28 +1,19 @@
-version: "3.9"
-
 services:
+
   backend:
-    build:
-      context: ./src/deployment
-      dockerfile: Dockerfile.backend
     container_name: backend
+    build:
+      context: ./src
+      dockerfile: deployment/DockerFile.backend
     ports:
       - "8000:8000"
-    networks:
-      - ml-network
 
   frontend:
-    build:
-      context: ./src/deployment
-      dockerfile: Dockerfile.frontend
     container_name: frontend
-    ports:
-      - "8501:8501"
+    build:
+      context: .
+      dockerfile: src/deployment/DockerFile.frontend
     depends_on:
       - backend
-    networks:
-      - ml-network
-
-networks:
-  ml-network:
-    driver: bridge
+    ports:
+      - "8501:8501"
