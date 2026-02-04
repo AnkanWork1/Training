@@ -1,0 +1,5 @@
+provider: openai
+model_name: gpt-4.1-mini
+embedding_model: "BAAI/bge-small-en"  # Or "BAAI/bge-base-en", "GTE-base", etc.
+
+api_key_env: OPENAI_API_KEY
