@@ -9,7 +9,7 @@ const users = [
   {
     name: "Esthera Jackson",
     email: "esthera@simmple.com",
-    avatar: "/images/user1.jpg",
+    avatar: "/avatars/avatar1.png",
     role: "Manager",
     department: "Organization",
     status: "Online",
@@ -18,7 +18,7 @@ const users = [
   {
     name: "Alexa Liras",
     email: "alexa@simmple.com",
-    avatar: "/images/user2.jpg",
+    avatar: "/avatars/avatar2.png",
     role: "Programmer",
     department: "Developer",
     status: "Offline",
@@ -27,7 +27,7 @@ const users = [
   {
     name: "Laurent Michael",
     email: "laurent@simmple.com",
-    avatar: "/images/user3.jpg",
+    avatar: "/avatars/avatar3.png",
     role: "Executive",
     department: "Projects",
     status: "Online",
@@ -36,7 +36,7 @@ const users = [
   {
     name: "Freduardo Hill",
     email: "freduardo@simmple.com",
-    avatar: "/images/user4.jpg",
+    avatar: "/avatars/avatar4.png",
     role: "Manager",
     department: "Organization",
     status: "Online",
@@ -45,7 +45,7 @@ const users = [
   {
     name: "Daniel Thomas",
     email: "daniel@simmple.com",
-    avatar: "/images/user5.jpg",
+    avatar: "/avatars/avatar5.png",
     role: "Programmer",
     department: "Developer",
     status: "Offline",
@@ -54,7 +54,7 @@ const users = [
   {
     name: "Mark Wilson",
     email: "mark@simmple.com",
-    avatar: "/images/user6.jpg",
+    avatar: "/avatars/avatar6.png",
     role: "Designer",
     department: "UI/UX Design",
     status: "Offline",

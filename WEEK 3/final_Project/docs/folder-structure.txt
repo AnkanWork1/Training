@@ -1,0 +1,103 @@
+.
+├── app
+│   ├── dashboard
+│   │   └── page.jsx
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.jsx
+│   ├── page.jsx
+│   ├── SignIn
+│   │   └── page.jsx
+│   └── Tables
+│       └── page.jsx
+├── components
+│   ├── Badge.jsx
+│   ├── Button.jsx
+│   ├── Card.jsx
+│   ├── Chart.jsx
+│   ├── index.jsx
+│   ├── Input.jsx
+│   ├── Modal.jsx
+│   ├── navbar.jsx
+│   ├── sidebar.jsx
+│   └── Table.jsx
+├── docs
+│   ├── folder-structure.txt
+│   └── screenshots
+│       ├── dashboard.png
+│       ├── home.png
+│       ├── profile.png
+│       ├── signIn.png
+│       └── tables.png
+├── eslint.config.mjs
+├── .gitignore
+├── Images
+│   ├── avatars
+│   │   ├── avatar10.png
+│   │   ├── avatar1.png
+│   │   ├── avatar2.png
+│   │   ├── avatar3.png
+│   │   ├── avatar4.png
+│   │   ├── avatar5.png
+│   │   ├── avatar6.png
+│   │   ├── avatar7.png
+│   │   ├── avatar8.png
+│   │   └── avatar9.png
+│   ├── BackgroundCard1.png
+│   ├── BgSignUp.png
+│   ├── ImageArchitect1.png
+│   ├── ImageArchitect2.png
+│   ├── ImageArchitect3.png
+│   ├── people-image.png
+│   ├── ProfileBackground.png
+│   ├── SidebarHelpImage.png
+│   └── signInImage.png
+├── next.config.js
+├── next.config.ts
+├── next-env.d.ts
+├── package.json
+├── package-lock.json
+├── postcss.config.mjs
+├── public
+│   ├── avatars
+│   │   ├── avatar10.png
+│   │   ├── avatar1.png
+│   │   ├── avatar2.png
+│   │   ├── avatar3.png
+│   │   ├── avatar4.png
+│   │   ├── avatar5.png
+│   │   ├── avatar6.png
+│   │   ├── avatar7.png
+│   │   ├── avatar8.png
+│   │   └── avatar9.png
+│   ├── BackgroundCard1.png
+│   ├── BgSignUp.png
+│   ├── feature1.png
+│   ├── feature2.png
+│   ├── feature3.png
+│   ├── file copy.svg
+│   ├── file.svg
+│   ├── globe copy.svg
+│   ├── globe.svg
+│   ├── hero.png
+│   ├── ImageArchitect1.png
+│   ├── ImageArchitect2.png
+│   ├── ImageArchitect3.png
+│   ├── next copy.svg
+│   ├── next.svg
+│   ├── people-image.png
+│   ├── ProfileBackground.png
+│   ├── SidebarHelpImage.png
+│   ├── signInImage.png
+│   ├── user1.png
+│   ├── user2.png
+│   ├── vercel copy.svg
+│   ├── vercel.svg
+│   ├── window copy.svg
+│   └── window.svg
+├── README.md
+├── style
+│   └── global.css
+└── tsconfig.json
+
+13 directories, 88 files

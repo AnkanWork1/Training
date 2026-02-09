@@ -7,7 +7,6 @@ export default function Sidebar() {
         <Link href="/">Home</Link>
         <Link href="/dashboard">Dashboard</Link>
         <Link href="/Tables">Tables</Link>
-        <Link href="../app/Signin">Sign in</Link>
       </nav>
     </aside>
     );
