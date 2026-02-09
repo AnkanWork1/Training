@@ -136,18 +136,21 @@ tree -a -I "node_modules|.next|.git"
 └── tsconfig.json
 
 🧩 Pages (App Router)
-Route	File
-/	app/page.jsx
-/dashboard	app/dashboard/page.jsx
-/Tables	app/Tables/page.jsx
-/SignIn	app/SignIn/page.jsx
+
+| Route        | File                     |
+| ------------ | ------------------------ |
+| `/`          | `app/page.jsx`           |
+| `/dashboard` | `app/dashboard/page.jsx` |
+| `/Tables`    | `app/Tables/page.jsx`    |
+| `/SignIn`    | `app/SignIn/page.jsx`    |
+
 🧱 Components List
 
-This list is generated from:
+Generated using:
 
 grep -R --include="*.jsx" -n "export default function" app components
 
-App level components (pages & layout)
+###App pages
 
 HomePage → app/page.jsx
 
@@ -158,6 +161,8 @@ RootLayout → app/layout.jsx
 UsersPage → app/Tables/page.jsx
 
 DashboardPage → app/dashboard/page.jsx
+
+###Shared components
 
 Shared UI components
 
