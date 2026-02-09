@@ -30,5 +30,23 @@ app.use("/api", emailRoutes);
 
   app.use("/api/users", userRoutes);
 
+  // Add this before `return app;`
+  app.post("/accounts", (req, res) => {
+    const { firstName, lastName, password } = req.body;
+
+    if (!firstName || !lastName || !password) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    // Here you can later save to MongoDB
+    res.status(201).json({
+      firstName,
+      lastName,
+      password,
+      message: "Account created successfully",
+    });
+  });
+
+
   return app;
 }

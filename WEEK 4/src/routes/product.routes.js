@@ -1,11 +1,17 @@
+// src/routes/product.routes.js
 import express from "express";
-import * as productController from "../controllers/product.controller.js";
+import {
+  getProducts,
+  getProductById,
+  softDeleteProduct,
+  restoreProduct
+} from "../controllers/product.controller.js";
 
 const router = express.Router();
 
-router.get("/", productController.getProducts);
-router.get("/:id", productController.getProductById);
-router.delete("/:id", productController.softDeleteProduct);
-router.patch("/:id/restore", productController.restoreProduct);
+router.get("/", getProducts);
+router.get("/:id", getProductById);
+router.delete("/:id", softDeleteProduct);
+router.patch("/:id/restore", restoreProduct);
 
 export default router;

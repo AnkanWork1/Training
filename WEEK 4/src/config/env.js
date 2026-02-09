@@ -7,11 +7,6 @@ apiLogger.info({
 }, "🔵 env.js running");
 
 export function loadEnv() {
-  apiLogger.info({
-    service: "api",
-    stage: "env"
-  }, "🌱 Loading environment variables...");
-
   const env = process.env.NODE_ENV || "local";
 
   const envFiles = {
@@ -25,17 +20,16 @@ export function loadEnv() {
   const result = dotenv.config({ path });
 
   if (result.error) {
-    apiLogger.error({
-      service: "api",
-      stage: "env",
-      err: result.error
-    }, "❌ Failed to load env file");
-    process.exit(1);
+    // ❌ DO NOT log here
+    // ❌ DO NOT call process.exit()
+    throw new Error(`Failed to load env file: ${result.error.message}`);
   }
 
+  // Only log after env is loaded
   apiLogger.info({
     service: "api",
     stage: "env",
     environment: env
   }, `🌱 Environment loaded: ${env}`);
 }
+
