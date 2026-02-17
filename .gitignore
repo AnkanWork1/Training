@@ -81,3 +81,4 @@ models/*.pkl
 # OS files
 .DS_Store
 Thumbs.db
+WEEK 4/src/logs/app.log
