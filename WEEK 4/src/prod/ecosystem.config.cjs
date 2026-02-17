@@ -21,8 +21,12 @@ module.exports = {
       log_date_format: "YYYY-MM-DD HH:mm:ss",
 
       env: {
-        NODE_ENV: "production"
+        NODE_ENV: "production",
+        PORT: 3000,
+        REDIS_URL: "redis://localhost:6379",
+        LOG_LEVEL: "info"
       }
+
     },
 
     {
@@ -32,8 +36,14 @@ module.exports = {
       autorestart: true,
 
       env: {
-        NODE_ENV: "production"
+        NODE_ENV: "production",
+        PORT: 3000,
+        REDIS_URL: "redis://localhost:6379",
+        error_file: "prod/logs/email-worker-error.log",
+        out_file: "prod/logs/email-worker-out.log",
+        LOG_LEVEL: "info"
       }
+
     }
   ]
 };

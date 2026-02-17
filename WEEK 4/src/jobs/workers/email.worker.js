@@ -1,22 +1,27 @@
 import { Worker } from "bullmq";
-import { workerLogger } from "../../utils/logger.js";
-import { emailQueue } from "../queues/email.queue.js";
+import IORedis from "ioredis";
 
-export const emailWorker = new Worker("email", async job => {
-  const { to, subject, body, requestId } = job.data;
-  
-  workerLogger.info({ jobId: job.id, requestId }, "Email job started");
+const connection = new IORedis(process.env.REDIS_URL, {
+  maxRetriesPerRequest: null
+});
 
-  // Simulate sending email
-  await new Promise(res => setTimeout(res, 2000));
+const worker = new Worker(
+  "email-queue",
+  async (job) => {
+    const { to, subject, body } = job.data;
 
-  workerLogger.info({ jobId: job.id, requestId }, "Email job completed");
+    console.log("Email job started", job.id, to);
 
-}, {
-  connection: {
-    host: "127.0.0.1",
-    port: 6379,
-    // maxRetriesPerRequest must be null or omitted
-    maxRetriesPerRequest: null
+    // simulate sending email
+    await new Promise((r) => setTimeout(r, 500));
+
+    console.log("Email job completed", job.id);
+  },
+  {
+    connection
   }
+);
+
+worker.on("failed", (job, err) => {
+  console.error("Email job failed", job?.id, err);
 });

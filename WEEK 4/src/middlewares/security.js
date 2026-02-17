@@ -23,4 +23,6 @@ export const securityMiddleware = (app) => {
 
   // Payload limit
   app.use(express.json({ limit: "10kb" }));
+
+  
 };
