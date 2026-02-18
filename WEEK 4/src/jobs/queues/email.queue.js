@@ -1,17 +1,12 @@
-import { Queue } from "bullmq";
-import IORedis from "ioredis";
-
-const connection = new IORedis(process.env.REDIS_URL);
+import { Queue } from "bullmq-mock"; // mock queue for in-memory testing
 
 export const emailQueue = new Queue("email-queue", {
-  connection,
   defaultJobOptions: {
     attempts: 3,
-    backoff: {
-      type: "exponential",
-      delay: 2000
-    },
+    backoff: { type: "exponential", delay: 2000 },
     removeOnComplete: true,
     removeOnFail: false
   }
 });
+
+// no Redis connection needed

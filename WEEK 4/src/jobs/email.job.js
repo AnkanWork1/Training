@@ -1,24 +1,29 @@
-import { emailQueue } from "./queues/email.queue.js";
-import { workerLogger } from "../utils/logger.js";
+import { Queue } from "bullmq";
 
-export const enqueueEmail = async ({ to, subject, body, requestId }) => {
-  try {
-    await emailQueue.add("send-email", {
-      to,
-      subject,
-      body,
-      requestId
-    });
-
-    workerLogger.info({
-      message: "Email job queued",
-      requestId
-    });
-  } catch (err) {
-    workerLogger.error({
-      message: "Failed to queue email",
-      requestId,
-      err
-    });
-  }
+const connection = {
+  url: process.env.REDIS_URL
 };
+
+export const EMAIL_QUEUE_NAME =
+  process.env.EMAIL_QUEUE_NAME || "email-queue";
+
+export const emailQueue = new Queue(EMAIL_QUEUE_NAME, {
+  connection
+});
+
+export async function enqueueEmailJob(payload, opts = {}) {
+  return emailQueue.add(
+    "send-email",
+    payload,
+    {
+      attempts: 3,
+      backoff: {
+        type: "exponential",
+        delay: 2000
+      },
+      removeOnComplete: true,
+      removeOnFail: false,
+      ...opts
+    }
+  );
+}

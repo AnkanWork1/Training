@@ -1,6 +1,7 @@
 import express from "express";
 import routes from "../routes/index.js";
-import { logger } from "../utils/logger.js";
+import { apiLogger } from "../utils/logger.js";
+
 
 export function loadExpress() {
   const app = express();
@@ -10,7 +11,7 @@ export function loadExpress() {
   let routeCount = 0;
   routes(app, () => routeCount++);
 
-  logger.info(`🛣 Routes mounted: ${routeCount} endpoints`);
+  apiLogger.info(`Routes mounted: ${routeCount} endpoints`);
 
   return app;
 }

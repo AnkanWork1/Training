@@ -1,27 +1,24 @@
-import { Worker } from "bullmq";
-import IORedis from "ioredis";
+// src/jobs/workers/email.worker.js
+import { emailQueue } from "../queues/email.queue.js"; // memory queue
+import { workerLogger } from "../../utils/logger.js";
 
-const connection = new IORedis(process.env.REDIS_URL, {
-  maxRetriesPerRequest: null
+function processJob(job) {
+  const { to, subject, body, requestId } = job.data;
+  workerLogger?.info({ jobId: job.id, pid: process.pid, requestId }, "processing email job") ||
+    console.log(`[Worker] Processing job ${job.id}`, job.data);
+
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      workerLogger?.info({ jobId: job.id, pid: process.pid, requestId }, "email job completed") ||
+        console.log(`[Worker] Completed job ${job.id}`);
+      resolve(true);
+    }, 1000); // simulate sending email
+  });
+}
+
+// register the worker
+emailQueue.registerWorker((job) => {
+  processJob(job);
 });
 
-const worker = new Worker(
-  "email-queue",
-  async (job) => {
-    const { to, subject, body } = job.data;
-
-    console.log("Email job started", job.id, to);
-
-    // simulate sending email
-    await new Promise((r) => setTimeout(r, 500));
-
-    console.log("Email job completed", job.id);
-  },
-  {
-    connection
-  }
-);
-
-worker.on("failed", (job, err) => {
-  console.error("Email job failed", job?.id, err);
-});
+console.log("Email worker (memory-only) started");

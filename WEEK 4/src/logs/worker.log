@@ -18,3 +18,9 @@
 {"level":30,"time":"2026-02-12T12:26:45.612Z","pid":250740,"hostname":"HESTABIT-416","message":"Email job queued","requestId":"10b5eaa2-9ca6-47c3-8059-53f1c62ce67e"}
 {"level":30,"time":"2026-02-12T12:26:46.582Z","pid":250740,"hostname":"HESTABIT-416","message":"Email job queued","requestId":"5b227757-f0cb-4aa0-bbe0-c6e9172be475"}
 {"level":30,"time":"2026-02-12T12:27:03.689Z","pid":250740,"hostname":"HESTABIT-416","message":"Email job queued","requestId":"146c98bd-bc10-4038-8ab2-f789f9519924"}
+{"level":30,"time":"2026-02-18T09:26:06.505Z","pid":1277807,"hostname":"HESTABIT-416","pid":1277807,"msg":"email worker ready"}
+{"level":30,"time":"2026-02-18T09:27:29.139Z","pid":1282039,"hostname":"HESTABIT-416","pid":1282039,"msg":"email worker ready"}
+{"level":30,"time":"2026-02-18T09:30:21.813Z","pid":1290827,"hostname":"HESTABIT-416","pid":1290827,"msg":"email worker ready"}
+{"level":30,"time":"2026-02-18T09:31:43.976Z","pid":1295119,"hostname":"HESTABIT-416","pid":1295119,"msg":"email worker ready"}
+{"level":30,"time":"2026-02-18T09:34:49.894Z","pid":1304693,"hostname":"HESTABIT-416","pid":1304693,"msg":"email worker ready"}
+{"level":30,"time":"2026-02-18T09:35:22.940Z","pid":1306499,"hostname":"HESTABIT-416","pid":1306499,"msg":"email worker ready"}

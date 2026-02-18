@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import bcrypt from "bcrypt";
 const accountSchema = new mongoose.Schema(
   {
     firstName: {
@@ -36,21 +36,23 @@ const accountSchema = new mongoose.Schema(
   }
 );
 
-/* ---------- VIRTUAL FIELD ---------- */
+/* VIRTUAL FIELD  */
 accountSchema.virtual("fullName").get(function () {
   return `${this.firstName} ${this.lastName}`;
 });
 
-/* ---------- INDEX ---------- */
+/*INDEX */
 accountSchema.index({ status: 1, createdAt: -1 });
 
-/* ---------- PRE-SAVE HOOK ---------- */
-// Using regular function with next callback for synchronous preprocessing
-accountSchema.pre("save", function () {
-  // Ensure email is always lowercase
-  this.email = this.email.toLowerCase();
-  // If you need async code later, convert this to async and remove next()
+/*  PRE-SAVE HOOK */
+accountSchema.pre("save", async function () {
+
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+
 });
+
 
 // Create and export model
 const Account = mongoose.model("Account", accountSchema);

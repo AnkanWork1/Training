@@ -13,29 +13,29 @@ startServer();
 
 async function startServer() {
   try {
-    console.log("🔹 Starting server bootstrap");
+    console.log("Starting server bootstrap");
 
     const cfg = config();
-    console.log("🔹 Config loaded:", {
+    console.log("Config loaded:", {
       env: process.env.NODE_ENV,
       port: cfg.port,
       dbUri: cfg.db?.uri,
     });
 
     // Connect MongoDB
-    console.log("🔹 Connecting to MongoDB...");
+    console.log("Connecting to MongoDB...");
     await connectDB(cfg.db.uri);
-    console.log("✅ MongoDB connected");
+    console.log("MongoDB connected");
 
     // Load Express app
-    console.log("🔹 Loading Express app...");
+    console.log("Loading Express app...");
     const app = await loadApp();
-    console.log("✅ Express app loaded");
+    console.log("Express app loaded");
 
     // Start server
     const PORT = cfg.port || 4000;
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`Server running on port ${PORT}`);
       apiLogger.info(
         {
           service: "api",
@@ -46,7 +46,7 @@ async function startServer() {
       );
     });
   } catch (err) {
-    console.error("❌ Server failed to start:", err);
+    console.error("Server failed to start:", err);
     apiLogger.error(
       {
         err,

@@ -1,51 +1,44 @@
 import express from "express";
-import productRoutes from "../routes/product.routes.js"; // if you have product routes
+import productRoutes from "../routes/product.routes.js"; 
 import userRoutes from "../routes/userRoutes.js";
 import { securityMiddleware } from "../middlewares/security.js";
 import { requestLogger } from "../middlewares/logger.js";
 import { errorHandler } from "../middlewares/error.middleware.js";
 import { requestTracing } from "../utils/tracing.js";
-import notifyRoutes from "../routes/notify.routes.js";
-
+import accountRoutes from "../routes/accounts.routes.js"; 
 import emailRoutes from "../routes/email.routes.js";
 
 export async function loadApp() {
   const app = express();
-  securityMiddleware(app); // attach globally
+  securityMiddleware(app); 
   app.use(express.json());
-  app.use(requestLogger);
-  app.use(errorHandler);
-
   app.use(requestTracing);
+  app.use(requestLogger);
 
-app.use("/api", emailRoutes);
+  
+  
+  
   // Ping route
   app.get("/ping", (req, res) => res.send("pong"));
 
   // Optional root route
-  app.get("/", (req, res) => res.send("Hello Day kebdwebwe"));
+  app.get("/health", (req, res) => res.send("Hello Day kebdwebwe"));
 
-  // Product routes
+
+  // Accounts routes -> day 2
+  app.use("/accounts", accountRoutes);
+
+  // Product routes-> day 3
   app.use("/products", productRoutes);
+
+  // routes -> Day 4
 
   app.use("/api/users", userRoutes);
 
-  // Add this before `return app;`
-  app.post("/accounts", (req, res) => {
-    const { firstName, lastName, password } = req.body;
+  //worker routes -> Day 5
+  app.use("/api", emailRoutes);
 
-    if (!firstName || !lastName || !password) {
-      return res.status(400).json({ error: "Missing required fields" });
-    }
-
-    // Here you can later save to MongoDB
-    res.status(201).json({
-      firstName,
-      lastName,
-      password,
-      message: "Account created successfully",
-    });
-  });
+  app.use(errorHandler);
 
 
   return app;
