@@ -142,10 +142,3 @@ curl -k https://myapp.local/api/health
 * API endpoints `/api/health` should respond correctly
 
 ---
-
-## ✅ Notes
-
-1. `node:20-alpine` containers are minimal — no curl installed inside; test from host or NGINX.
-2. NGINX must have **correct certificate paths** (`nginx.conf` → `/etc/nginx/certs/...`).
-3. Port 443 must be exposed in Docker (`-p 443:443`).
-4. HTTP → HTTPS redirect ensures all traffic is encrypted locally.

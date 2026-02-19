@@ -5,19 +5,15 @@ Run the Node.js application in a Docker container to ensure local containerized 
 
 ## Steps Taken
 
-1. **Check port 3000 for existing processes:**
-```bash
-sudo ss -tulnp | grep :3000
-```
-2. **Kill any process using port 3000 (if necessary):**
-```bash
-sudo kill -9 <PID>
-```
-3. **Remove old Docker containers (if they exist):**
-```bash
-docker rm my-node-app my-node-app-dev
-```
-4. **Run the Node.js app in Docker:**
+
+
+1. **Build Docker image (create image)**
+
+Run this command from the directory where your Dockerfile is present.
+
+docker build -t node-app .
+
+2. **Run the Node.js app in Docker:**
 ```bash
 docker run -d \
   --name my-node-app-dev \
@@ -26,7 +22,7 @@ docker run -d \
   node-app
 ```
 
-5. **Verify the container is running:**
+3. **Verify the container is running:**
 ```bash
 docker ps
 ```
@@ -36,16 +32,27 @@ CONTAINER ID   IMAGE      COMMAND             STATUS         PORTS              
 <id>           node-app   "docker-entrypoint…" Up X seconds 0.0.0.0:3000->3000/tcp my-node-app-dev
 ```
 
-6. **Verify port mapping:**
-```bash
-sudo ss -tulnp | grep :3000
-```
-Expected output shows `docker-proxy` listening on port 3000.
-
-7. **Verify app response (optional):**
-```bash
+4. **Verify application response**
 curl http://localhost:3000
-```
+
+5. **Go inside the running container (like SSH)**
+docker exec -it my-node-app-dev /bin/sh
+
+6. **Run commands inside the container**
+
+
+
+- pwd
+- ls
+- ps aux
+- env
+
+7. **Stop the running container**
+docker stop my-node-app-dev
+
+8. **Remove the container**
+docker rm my-node-app-dev
+
 
 ## Deliverables
 - Node.js app is running in Docker container: `my-node-app-dev`

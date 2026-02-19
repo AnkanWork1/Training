@@ -9,10 +9,10 @@ const mongoUri = process.env.MONGO_URI;
 mongoose
   .connect(mongoUri)
   .then(() => {
-    console.log("✅ Mongo connected");
+    console.log("Mongo connected");
   })
   .catch((err) => {
-    console.error("❌ Mongo error:", err);
+    console.error(" Mongo error:", err);
   });
 
 app.get("/api/health", (req,res) => {
@@ -26,6 +26,6 @@ app.get("/", (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("🚀 Server running on port 3000");
+  console.log("Server running on port 3000");
 });
 

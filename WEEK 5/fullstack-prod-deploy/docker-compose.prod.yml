@@ -2,9 +2,6 @@ services:
   backend:
     build:
       context: ./backend
-    container_name: backend
-    ports:
-      - "3000:3000"
     environment:
       MONGO_URI: mongodb://mongo:27017/appdb
     depends_on:
@@ -20,7 +17,7 @@ services:
 
   mongo:
     image: mongo:7
-    container_name: mongo
+    container_name: mongo1
     restart: unless-stopped
     volumes:
       - mongo_data:/data/db
