@@ -1,0 +1,14 @@
+[
+  {
+    "question": "/home/ankanguha/Desktop/Training/WEEK 7/src/tmp_images/07adb16256fc471cae3c9878cd79bb97.jpeg",
+    "content": "Not found."
+  },
+  {
+    "question": "name of persons living in bhutan top 5 only",
+    "content": {
+      "type": "sql_pipeline",
+      "sql": "SELECT \"First Name\", \"Last Name\"\nFROM customers\nWHERE \"Country\" = 'Bhutan'\nLIMIT 5;",
+      "summary": "Result for: name of persons living in bhutan top 5 only\nReturned 5 rows.\nFirst Name=Dave, Last Name=Jensen\nFirst Name=Anne, Last Name=Harper\nFirst Name=Alice, Last Name=Whitehead\nFirst Name=Belinda, Last Name=Oneill\nFirst Name=Gloria, Last Name=Paul"
+    }
+  }
+]
