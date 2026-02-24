@@ -77,8 +77,11 @@ data/processed/*.csv
 
 # Model binaries (if you don't want to push them)
 models/*.pkl
+quantized/
 
 # OS files
 .DS_Store
 Thumbs.db
 WEEK 4/src/logs/app.log
+llama.cpp/
+content/

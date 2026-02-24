@@ -14,9 +14,7 @@ TUNING_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def tune_model(X_train, y_train):
-    """
-    Tune XGBoost hyperparameters using GridSearchCV
-    """
+    
     # Hyperparameter grid
     param_grid = {
         'n_estimators': [100, 200, 300],
@@ -55,7 +53,7 @@ def tune_model(X_train, y_train):
     with open(TUNING_DIR / "results.json", "w") as f:
         json.dump(results, f, indent=4)
 
-    print("✅ Hyperparameter tuning completed!")
+    print("Hyperparameter tuning completed!")
     print("Best parameters:", best_params)
     print(f"Best CV R2: {best_score:.4f}")
 

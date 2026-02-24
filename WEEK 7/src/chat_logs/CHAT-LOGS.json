@@ -10,5 +10,9 @@
       "sql": "SELECT \"First Name\", \"Last Name\"\nFROM customers\nWHERE \"Country\" = 'Bhutan'\nLIMIT 5;",
       "summary": "Result for: name of persons living in bhutan top 5 only\nReturned 5 rows.\nFirst Name=Dave, Last Name=Jensen\nFirst Name=Anne, Last Name=Harper\nFirst Name=Alice, Last Name=Whitehead\nFirst Name=Belinda, Last Name=Oneill\nFirst Name=Gloria, Last Name=Paul"
     }
+  },
+  {
+    "question": "Who is the chairmen of hestabit?",
+    "content": "Not found."
   }
 ]
