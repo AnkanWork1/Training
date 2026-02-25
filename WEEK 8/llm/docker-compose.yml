@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   backend:
     build:
@@ -5,8 +7,15 @@ services:
       dockerfile: deploy/Dockerfile.backend
     image: llm-backend
     container_name: llm-backend
+    volumes:
+      - ./quantized:/app/quantized
+      - ./logs:/app/logs
+      - ./llama.cpp/build/bin/llama-server:/app/llama-server
     ports:
       - "8000:8000"
+    environment:
+      - BASE_URL=http://backend:8080/v1
+      - API_KEY=dummy
 
   ui:
     build:

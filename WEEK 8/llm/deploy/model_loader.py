@@ -5,20 +5,16 @@ import time
 from typing import Literal
 
 PORT = 8080
-PROCESS = None  
+PROCESS = None  # Global process handle for the model server
 
 
 def _absolute_path(path: str) -> str:
-    """
-    Fix relative path issues.
-    """
+    """Return absolute path to avoid relative path issues."""
     return os.path.abspath(path)
 
 
 def _is_port_used(port: int) -> bool:
-    """
-    Check if server already running.
-    """
+    """Check if the given port is already in use."""
     import socket
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -28,10 +24,20 @@ def _is_port_used(port: int) -> bool:
 def serve_model(
     model_path: str,
     model_type: Literal["vllm", "gguf"],
+    llama_server_path: str = None,
     dtype: str = "float16",
     max_model_len: int = 4096,
 ):
+    """
+    Start a local model server.
 
+    Args:
+        model_path: Path to the model file/directory.
+        model_type: "vllm" or "gguf".
+        llama_server_path: Path to llama-server binary (required for gguf).
+        dtype: Data type for vllm models (default "float16").
+        max_model_len: Maximum context length (default 4096).
+    """
     global PROCESS
 
     # Avoid duplicate server
@@ -40,7 +46,6 @@ def serve_model(
         return
 
     model_path = _absolute_path(model_path)
-
     if not os.path.exists(model_path):
         raise ValueError(f"Model path does not exist: {model_path}")
 
@@ -51,26 +56,34 @@ def serve_model(
             model_path,
             "--port",
             str(PORT),
+            "--dtype",
+            dtype,
+            "--max-model-length",
+            str(max_model_len),
         ]
 
     elif model_type == "gguf":
+        if not llama_server_path:
+            raise ValueError("For gguf models, llama_server_path must be provided")
 
-        llama_server = _absolute_path(
-            "/home/omjidubey/Desktop/Training/Week8/llama.cpp/build/bin/llama-server"
-        )
-
-        if not os.path.exists(llama_server):
+        llama_server_path = _absolute_path(llama_server_path)
+        if not os.path.exists(llama_server_path):
             raise ValueError(
-                f"llama-server not found at {llama_server}\nBuild llama.cpp first."
+                f"llama-server not found at {llama_server_path}\nBuild llama.cpp first."
             )
 
         cmd = [
-            "llama.cpp/build/bin/llama-server",
-            "--model", model_path,
-            "--port", str(PORT),
-            "--ctx-size", "2048",
-            "--temp", "0.3",
-            "--repeat-penalty", "1.1"
+            llama_server_path,
+            "--model",
+            model_path,
+            "--port",
+            str(PORT),
+            "--ctx-size",
+            "2048",
+            "--temp",
+            "0.3",
+            "--repeat-penalty",
+            "1.1",
         ]
 
     else:
@@ -86,16 +99,13 @@ def serve_model(
         text=True,
     )
 
-    # Giving server some time
+    # Give server some time to start
     time.sleep(4)
-
     print("Model server launched!")
 
 
 def stop_model():
-    """
-    Gracefully stop model server.
-    """
+    """Gracefully stop the running model server."""
     global PROCESS
 
     if PROCESS:

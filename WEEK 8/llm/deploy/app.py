@@ -9,36 +9,30 @@ from openai import OpenAI
 from deploy.config import (
     MODEL_NAME, BASE_URL, API_KEY,
     TEMPERATURE, TOP_P, TOP_K, MAX_TOKENS,
-    MODEL_TYPE, DEFAULT_SYSTEM
+    MODEL_TYPE, DEFAULT_SYSTEM, LLAMA_SERVER_PATH  # <-- add this to config
 )
-
 from deploy.model_loader import serve_model
 from deploy.logger import get_logger
 
-# logger(in json form)
-
 logger = get_logger()
 
-# FastAPI App
-
+# ---- FASTAPI APP ----
 app = FastAPI(title="Quantised LLM Server")
 
-# Load GGUF / HF model server
+# ---- START GGUF / HF model server ----
+# Pass llama_server_path correctly (inside Docker: /app/llama-server)
+serve_model(MODEL_NAME, MODEL_TYPE, llama_server_path=LLAMA_SERVER_PATH)
 
-serve_model(MODEL_NAME, MODEL_TYPE)
-
-# OpenAI compatible client (llama.cpp server)
-
+# ---- OpenAI-compatible client ----
 client = OpenAI(
-    base_url=BASE_URL,
+    base_url=BASE_URL,  # inside Docker, 127.0.0.1:8080
     api_key=API_KEY,
 )
 
-# Chat memory
+# ---- Chat memory ----
 CHAT_SESSIONS: Dict[str, List[dict]] = {}
 
-# Request schema
-
+# ---- Request schema ----
 class LLMRequest(BaseModel):
     prompt: str
     system_prompt: Optional[str] = None
@@ -49,29 +43,17 @@ class LLMRequest(BaseModel):
     max_tokens: int = MAX_TOKENS
 
 
-# message builder
-
+# ---- Helper functions ----
 def build_messages(system_prompt: Optional[str], user_prompt: str):
-
     messages = []
-
     sys_msg = system_prompt if system_prompt else DEFAULT_SYSTEM
     messages.append({"role": "system", "content": sys_msg})
-
-    user_prompt = (
-        "Answer clearly and correctly.\n"
-        f"Question: {user_prompt}"
-    )
-
+    user_prompt = f"Answer clearly and correctly.\nQuestion: {user_prompt}"
     messages.append({"role": "user", "content": user_prompt})
-
     return messages
 
 
-# stream function
-
 def stream_llm(messages: List[dict], req: LLMRequest, request_id: str):
-
     logger.info(
         "stream_start",
         extra={
@@ -82,13 +64,13 @@ def stream_llm(messages: List[dict], req: LLMRequest, request_id: str):
         },
     )
 
+    # ---- OpenAI-compatible streaming call (no top_k) ----
     stream = client.chat.completions.create(
         model=MODEL_NAME,
         messages=messages,
         temperature=req.temperature,
         top_p=req.top_p,
         max_tokens=req.max_tokens,
-        extra_body={"top_k": req.top_k},
         stream=True,
     )
 
@@ -99,13 +81,9 @@ def stream_llm(messages: List[dict], req: LLMRequest, request_id: str):
                 yield delta.content
 
 
-#Single generation
-
 @app.post("/generate")
 def generate(req: LLMRequest):
-
     request_id = str(uuid4())
-
     logger.info(
         "generate_start",
         extra={"request_id": request_id, "endpoint": "/generate"},
@@ -113,20 +91,12 @@ def generate(req: LLMRequest):
 
     messages = build_messages(req.system_prompt, req.prompt)
 
-    return StreamingResponse(
-        stream_llm(messages, req, request_id),
-        media_type="text/plain",
-    )
-
-
-# infinite chat with memory
-
+    # Stream the LLM output to the client
+    return StreamingResponse(stream_llm(messages, req, request_id), media_type="text/plain")
 @app.post("/chat")
 def chat(req: LLMRequest):
-
     request_id = str(uuid4())
     chat_id = req.chat_id or str(uuid4())
-
     history = CHAT_SESSIONS.setdefault(chat_id, [])
 
     if not history:
@@ -137,17 +107,11 @@ def chat(req: LLMRequest):
 
     logger.info(
         "chat_start",
-        extra={
-            "request_id": request_id,
-            "endpoint": "/chat",
-            "chat_id": chat_id,
-        },
+        extra={"request_id": request_id, "endpoint": "/chat", "chat_id": chat_id},
     )
 
     def generator():
-
         buffer = []
-
         for token in stream_llm(messages, req, request_id):
             buffer.append(token)
             yield token

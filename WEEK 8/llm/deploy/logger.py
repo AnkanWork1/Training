@@ -6,7 +6,6 @@ from deploy.config import LOG_FILE
 
 class JsonFormatter(logging.Formatter):
     def format(self, record):
-
         log_record = {
             "time": datetime.utcnow().isoformat(),
             "level": record.levelname,
@@ -22,6 +21,8 @@ class JsonFormatter(logging.Formatter):
         return json.dumps(log_record)
 
 def get_logger():
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 
     logger = logging.getLogger("llm")
     logger.setLevel(logging.INFO)

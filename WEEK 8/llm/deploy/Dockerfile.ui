@@ -2,12 +2,11 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY deploy/requirements-ui.txt .
-
-RUN pip install --no-cache-dir -r requirements-ui.txt
+COPY deploy/requirements_ui.txt .
+RUN pip install --no-cache-dir -r requirements_ui.txt
 
 COPY . .
 
 EXPOSE 8501
 
-CMD ["streamlit", "run", "deploy/ui.py", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "deploy/ui_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
