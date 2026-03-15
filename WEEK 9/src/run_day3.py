@@ -1,5 +1,5 @@
-from src.tools.query_generator import generate_task
-from src.orchestrator.orchestrator import route
+from tools.query_generator import generate_task
+from orchestrator.orchestrator import route
 
 
 def main():

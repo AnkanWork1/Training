@@ -1,7 +1,7 @@
 import json
 import re
 from autogen import ConversableAgent
-from src.llm_config import llm_config
+from llm_config import llm_config
 
 
 query_generator = ConversableAgent(

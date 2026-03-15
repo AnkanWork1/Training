@@ -1,8 +1,8 @@
-from src.tools.code_executor import execute_python_snippet as execute_code
-from src.tools.file_agent import FileAgent
-from src.tools.db_agent import DBAgent
-from src.tools.shell_agent import ShellAgent
-from src.tools.search_agent import LocalSearchAgent
+from tools.code_executor import execute_python_snippet as execute_code
+from tools.file_tool import FileAgent
+from tools.db_tool import DBAgent
+from tools.shell_tool import ShellAgent
+from tools.search_tool import LocalSearchAgent
 
 
 _shell = ShellAgent()

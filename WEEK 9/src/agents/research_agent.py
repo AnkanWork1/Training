@@ -20,3 +20,31 @@ research_agent = ConversableAgent(
     llm_config=llm_config,
     max_consecutive_auto_reply=10
 )
+
+
+
+class Researcher:
+
+    def __init__(self, llm_config):
+
+        self.agent = ConversableAgent(
+            name="research_agent",
+            system_message=(
+                "You are a Research Agent for AI and machine learning topics. "
+                "Your job is ONLY to gather factual information. "
+                "Do NOT summarize. Do NOT answer the question directly. "
+                "Return raw research findings."
+            ),
+            llm_config=llm_config,
+            max_consecutive_auto_reply=3
+        )
+
+    def run(self, query):
+
+        print("[Researcher] Gathering information...")
+
+        response = self.agent.generate_reply(
+            messages=[{"role": "user", "content": query}]
+        )
+
+        return response

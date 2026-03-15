@@ -1,3 +1,5 @@
+
+
 # BENCHMARK REPORT — DAY 4
 Inference Optimisation and Model Comparison
 
@@ -55,15 +57,16 @@ was used as the accuracy score.
 
 ---
 
+
 ## 3. Benchmark Results
 
-| Model | Tokens/sec | Latency | VRAM | Accuracy |
-|---|---|---|---|---|
-| base | 57.46 | 2.48s | 2.88 GB | 0.798 |
-| fp16 | 49.74 | 2.87s | 2.88 GB | 0.798 |
-| int8 | 14.01 | 10.20s | 1.59 GB | 0.804 |
-| int4 | 13.33 | 5.69s | 1.21 GB | 0.759 |
-| gguf | 5.18 | 27.96s | 0 | 0.698 |
+| Model | Tokens/sec | Latency (s) | VRAM (GB) | Accuracy |
+|-------|------------|-------------|-----------|----------|
+| base  | 28.685223883442113 | 3.2769484519958496 | 2.4758567810058594 | 0.8271123766899109 |
+| fp16  | 82.41765304960138  | 2.2689313888549805 | 2.4768357276916504 | 0.7980424165725708 |
+| int8  | 14.440706184682933 | 9.00232982635498   | 1.5790224075317383 | 0.7808601260185242 |
+| int4  | 35.24084544937193  | 5.079333305358887  | 1.2199702262878418 | 0.811732292175293  |
+| gguf  | 4.97737991623245   | 32.94906210899353  | 0                 | 0.7897317409515381 |
 
 - Real time work
 
@@ -118,11 +121,11 @@ GGUF:
 
 Accuracy values represent semantic similarity (0 to 1 scale).
 
-Base Model: 0.798  
+Base Model: 0.827
 Fine-Tuned Model: 0.798  
-INT8 Model: 0.804  
-INT4 Model: 0.759  
-GGUF Model: 0.698  
+INT8 Model: 0.781
+INT4 Model: 0.812
+GGUF Model: 0.789  
 
 Observations:
 
